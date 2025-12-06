@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "pizza": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/Users/YOUR_USERNAME/repos/mcp-pizza",
+        "run",
+        "python",
+        "-m",
+        "mcpizza"
+      ]
+    }
+  }
+}
