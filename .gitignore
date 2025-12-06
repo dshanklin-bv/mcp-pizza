@@ -44,6 +44,13 @@ htmlcov/
 
 # Logs
 *.log
+logs/
 
 # Customer Info (contains personal data)
 .customer_info.json
+
+# UV lock file
+uv.lock
+
+# Demo files
+mcpizza/demo_no_real_api.py
