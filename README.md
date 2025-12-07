@@ -104,16 +104,58 @@ See [WORKFLOW.md](WORKFLOW.md) for complete ordering workflow documentation.
 
 ## Architecture
 
+The codebase follows a clean, modular architecture with separation of concerns:
+
 ```
 mcp-pizza/
 ├── mcpizza/
-│   ├── server.py          # Main MCP server with all tools
+│   ├── server.py          # Main MCP server (303 lines, down from 1308!)
 │   ├── logger.py          # Interaction logging system
-│   └── __main__.py        # Entry point
+│   ├── __main__.py        # Entry point
+│   │
+│   ├── models/            # Pydantic parameter models
+│   │   └── params.py      # Tool parameter definitions
+│   │
+│   ├── services/          # Business logic layer
+│   │   ├── store_service.py     # Store lookup & menu browsing
+│   │   ├── order_service.py     # Order creation & management
+│   │   ├── payment_service.py   # Payment processing
+│   │   └── guidance_service.py  # AI ordering guidance
+│   │
+│   ├── tools/             # MCP tool handlers
+│   │   ├── store_tools.py       # Store-related tools
+│   │   ├── menu_tools.py        # Menu-related tools
+│   │   ├── order_tools.py       # Order-related tools
+│   │   └── guidance_tools.py    # Guidance tools
+│   │
+│   ├── api/               # Domino's API client
+│   │   ├── endpoints.py         # API endpoint constants
+│   │   └── client.py            # HTTP client wrapper
+│   │
+│   └── utils/             # Utilities
+│       └── mock_order.py        # Mock order object creation
+│
+├── tests/                 # Comprehensive test suite (18 tests)
+│   ├── test_models.py     # Model validation tests
+│   ├── test_utils.py      # Utility function tests
+│   ├── test_api_client.py # API client tests
+│   └── test_services.py   # Service layer tests
+│
+├── examples/              # Example scripts
+│   └── test_mcp_with_ollama.py  # Autonomous testing
+│
 ├── logs/                  # Interaction logs (gitignored)
 ├── WORKFLOW.md            # Complete workflow documentation
 └── README.md              # This file
 ```
+
+### Benefits of This Architecture
+
+1. **Maintainability**: Each module has a single responsibility
+2. **Testability**: Services and utilities are easily unit tested
+3. **Readability**: Clear separation between MCP layer, business logic, and API calls
+4. **Scalability**: Easy to add new tools or services
+5. **Reusability**: Services can be reused outside of MCP context
 
 ## Logging
 
